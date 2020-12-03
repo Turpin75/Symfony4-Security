@@ -22,6 +22,7 @@ class CommentRepository extends ServiceEntityRepository
 
     /**
      * @param string|null $term
+     * @return QueryBuilder
      */
     public function getWithSearchQueryBuilder(?string $term): QueryBuilder
     {
