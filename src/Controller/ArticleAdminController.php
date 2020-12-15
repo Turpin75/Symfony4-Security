@@ -12,12 +12,12 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Class ArticleAdminController
  * @package App\Controller
- * @IsGranted("ROLE_ADMIN")
  */
 class ArticleAdminController extends AbstractController
 {
     /**
      * @Route("/admin/article/new", name="admin_article_new")
+     * @IsGranted("ROLE_ADMIN_ARTICLE")
      */
     public function new(EntityManagerInterface $em)
     {
@@ -29,4 +29,15 @@ class ArticleAdminController extends AbstractController
             $article->getSlug()
         ));
     }
+
+    /**
+     * @Route("/admin/article/{id}/edit")
+     * @IsGranted("MANAGE", subject="article")
+     */
+    public function edit(Article $article)
+    {
+        dd($article);
+    }
+
+
 }

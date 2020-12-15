@@ -13,13 +13,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 /**
  * Class CommentAdminController
  * @package App\Controller
- * @IsGranted("ROLE_ADMIN")
+ * @IsGranted("ROLE_ADMIN_COMMENT")
  */
 class CommentAdminController extends Controller
 {
     /**
      * @Route("/admin/comment", name="comment_admin")
-     * @IsGranted("ROLE_ADMIN")
+     * @IsGranted("ROLE_ADMIN_COMMENT")
      */
     public function index(CommentRepository $repository, Request $request, PaginatorInterface $paginator)
     {

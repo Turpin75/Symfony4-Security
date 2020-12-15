@@ -9,6 +9,11 @@ security:
             entity:
                 class: App\Entity\User
                 property: email
+
+    role_hierarchy:
+        ROLE_ADMIN: [ROLE_ADMIN_ARTICLE, ROLE_ADMIN_COMMENT, ROLE_ALLOWED_TO_SWITCH]
+        #ROLE_EDITOR: [ROLE_ADMIN_ARTICLE]
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -19,6 +24,8 @@ security:
             guard:
                 authenticators:
                     - App\Security\LoginFormAuthenticator
+                    - App\Security\ApiTokenAuthenticator
+                entry_point: App\Security\LoginFormAuthenticator
 
             logout:
                 path: app_logout
@@ -31,7 +38,7 @@ security:
             # https://symfony.com/doc/current/security.html#firewalls-authentication
 
             # https://symfony.com/doc/current/security/impersonating_user.html
-            # switch_user: true
+            switch_user: true
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
@@ -39,5 +46,4 @@ security:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
          - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-         - { path: ^/, roles: IS_AUTHENTICATED_REMEMBERED }
-         - { path: ^/change*password, roles: IS_AUTHENTICATED_FULLY }
+         - { path: ^/change_password, roles: IS_AUTHENTICATED_FULLY }
